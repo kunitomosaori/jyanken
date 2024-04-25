@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="js/jquery-2.1.3.min.js"></script>
+  <link rel="stylesheet" href="css/sample.css">
+  <title>コイン集めゲーム</title>
+</head>
+
+<body>
+
+  <header>
+    <h1>コイン集めゲーム</h1>
+  </header>
+
+  <main>
+    <ul>
+      <li id="btnResult">結果表示</li>
+    </ul>
+    <div class="number"><!-- 結果の並び順 -->
+      <span id="pc_hands"></span>
+      <span id="pc_hands2"></span>
+      <span id="pc_hands3"></span>
+    </div>
+    <div class="coin">
+      <!-- コインの並び順 -->
+      <img class="blockimg" src="./img/block_renga_brown.png" alt="">
+      <img class="blockimg" src="./img/block_gold.png" alt="">
+      <img class="blockimg" src="./img/block_renga_brown.png" alt="">
+      <img class="blockimg" src="./img/block_gold.png" alt="">
+      <img class="blockimg" src="./img/block_renga_brown.png" alt="">
+      <img class="blockimg" src="./img/block_gold.png" alt="">
+      <img class="blockimg" src="./img/block_renga_brown.png" alt="">
+    </div>
+    
+    <div>
+      <img src="./img/mario.png" alt="">
+    </div>
+    
+    <div>結果「<span id="judgment"></span>」</div>
+
+    <div class="coin_wrapping">
+      <img class="coin_gold"src="./img/coin_gold_02.png" alt=""><span id="totalscore"></span>
+    </div>
+    <button id="btnReset">もう一回！</button>
+  </main>
+
+<P>ルール</P>
+<p>・pc_handsはそれぞれ０か１か２が出ます。
+  ・pc_hands1*pc_hands2*pc_hands3の和が結果としてjudgmentに出ます。
+  ・三回連続judgmentが0だったら、ボーナスタイムとなります。
+  ・ボーナスタイムではpc_handsはそれぞれ１か２しか出ません。
+  ・ボーナスタイムでは得点が２倍になります。
+  ・ボーナスタイムは１回引いたら終わります。
+</p>
+  
+  <footer></footer>
+
+  <script>
+    let totalScore = 0;
+    let flag0 = 0; // 0の出た回数を数える
+    // let bonusTimecount = 0; // ボーナスタイムの出た回数を数える
+    let bonusTime = 0;
+    let bonusTimecount = 0;
+
+    $("#btnResult").on("click", function () {
+      let result1, result2, result3;
+
+      console.log(bonusTime)
+      // ボーナスタイム発動条件
+      if (flag0 == 3) {
+        bonusTime = 3; // ボーナスタイムを2回設定
+        // flag0 = 0; // フラグをリセット
+      }
+
+      if (bonusTime > 0) {
+        result1 = Math.floor(Math.random() * 2) + 1; // 1, 2
+        result2 = Math.floor(Math.random() * 2) + 1; // 1, 2
+        result3 = Math.floor(Math.random() * 2) + 1; // 1, 2
+        bonusTime--; // ボーナスタイムを減算
+      } else {
+        result1 = Math.floor(Math.random() * 3); // 0, 1, 2
+        result2 = Math.floor(Math.random() * 3); // 0, 1, 2
+        result3 = Math.floor(Math.random() * 3); // 0, 1, 2
+      }
+
+      $("#pc_hands").html(result1);
+      $("#pc_hands2").html(result2);
+      $("#pc_hands3").html(result3);
+
+      // 結果の計算
+      let total = (result1) * (result2) * (result3);
+      if (bonusTime > 0) {
+        total *= 2; // ボーナスタイムで得点2倍
+      }
+      $("#judgment").html(total);
+
+      // トータルスコアに加算
+      totalScore += total;
+      $("#totalscore").html(totalScore);
+
+      // 0の数をflagでカウント
+      if (total == 0) {
+        flag0++;
+      } else {
+        flag0 = 0; // 連続していなければリセット
+      }
+    });
+
+    // リセットボタンのクリックイベント
+    $("#btnReset").on("click", function () {
+      $("#pc_hands").html("");
+      $("#pc_hands2").html("");
+      $("#pc_hands3").html("");
+      $("#judgment").html("");
+      $("#totalscore").html("");
+      totalScore = 0;
+      flag0 = 0;
+      bonusTime = 0;
+    });
+
+  
+  </script>
+
+</body>
+
+</html>

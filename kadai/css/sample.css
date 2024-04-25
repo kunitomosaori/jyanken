@@ -1,0 +1,152 @@
+body {
+    color: #242424;
+    height: 100%;
+    background-color: white;
+    line-height: 1.7;
+    /* 行間 */
+    padding: 0;
+    text-align: center;
+    font-size: 32px;
+    background-color: rgba(0, 157, 255, 0.89);
+}
+
+header {
+    background-color: black;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: black;
+    text-align: center;
+}
+
+p {
+    font-size: 16px;
+    text-align: center;
+    color: #FFF;
+}
+
+/* ボタンのため追加 */
+/*まずはお決まりのボックスサイズ算出をborer-boxに */
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+html {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 62.5%;
+    /*rem算出をしやすくするために*/
+}
+
+.btn,
+a.btn,
+button.btn {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.5;
+    position: relative;
+    display: inline-block;
+    padding: 1rem 4rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    color: #212529;
+    background-color: red; /* 赤色の背景を設定 */
+    border-radius: 0.5rem;
+}
+
+a.btn--circle {
+    border-radius: 50%;
+    line-height: 100px;
+    width: 100px;
+    height: 100px;
+    padding: 0;
+    -webkit-box-shadow: 0 5px 0 red;
+    box-shadow: 0 10px 0 rgba(255, 34, 0, 0.653);
+}
+
+a.btn--circle:hover {
+    -webkit-transform: translate(0, 3px);
+    transform: translate(0, 3px);
+    -webkit-box-shadow: 0 2px 0 red;
+    box-shadow: 0 2px 0 rgba(255, 34, 0, 0.653);
+}
+
+/* ボタン終了 */
+
+.number {
+    display: flex;
+    /* コンテンツ横並び */
+    justify-content: center;
+}
+
+.coin_wrapping {
+    display: flex;
+    justify-content: start;
+}
+
+.totalscore {
+    color: #fff;
+}
+
+.coin_gold {
+    width: 30px;
+    height: auto;
+}
+
+.coin {
+    display: flex;
+    /* コンテンツ横並び */
+    justify-content: center;
+}
+
+.coindisplay {
+    width: 100px;
+    height: 100px;
+}
+
+.coindisplay img {
+    opacity: 0;
+    /* 透明 0：透明、1：100％表示 */
+    width: 30px;
+    height: auto;
+}
+
+.blockimg {
+    width: 100px;
+    height: auto;
+}
+
+.mario{
+    display: flex;
+    justify-content: start;
+}
+
+.star {
+    position: fixed;
+    color: gold;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    top: -50px; /* 初期位置を画面外に設定 */
+}
+
+@keyframes fall {
+    0% { opacity: 1; }
+    100% { top: 110vh; opacity: 0; } /* 画面の縦の高さを超える位置まで移動 */
+}
